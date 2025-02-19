@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>onWebTrack</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="../lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="../assets/icons/icon48.png" alt="onWebTrack Logo" class="logo-icon" width="24" height="24">
+                <h1>onWebTrack</h1>
+            </div>
+            <div class="header-buttons">
+                <button id="themeToggle" class="btn-theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                </button>
+                <button id="dashboard" class="btn-dashboard">Dashboard</button>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="daily">Today</button>
+            <button class="tab-btn" data-tab="weekly">Weekly</button>
+        </div>
+
+        <div class="content-section" id="dailyContent">
+            <div class="chart-container" id="dailyChart"></div>
+
+            <div class="stats-cards">
+                <div class="stat-card" id="timeSpentCard">
+                    <h3>Total time 2h 6m 3s</h3>
+                    <p>53.06% lower than yesterday</p>
+                </div>
+                <div class="stat-card" id="siteVisitedCard">
+                    <h3>Site visited 4</h3>
+                    <p>11 less than yesterday</p>
+                </div>
+            </div>
+
+            <button id="viewDetail" class="btn-view-detailed">View detailed</button>
+
+            <div class="collapse" id="webListDiv">
+                <table class="table table-hover site-list">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Website</th>
+                            <th scope="col">Time Spent</th>
+                            <th scope="col">Session</th>
+                        </tr>
+                    </thead>
+                    <tbody id="webList">
+                        <!-- Dynamic content will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section hidden" id="weeklyContent">
+            <div class="chart-container" id="weeklyChart"></div>
+
+            <div class="weekly-stats">
+                <div class="stat-card full-width">
+                    <h3>Maximum Time spent <span id="weekMax">0h 0m 0s</span></h3>
+                </div>
+                <div class="stat-card full-width">
+                    <h3>Minimum Time spent <span id="weekMin">0h 0m 0s</span></h3>
+                </div>
+                <div class="stat-card full-width">
+                    <h3>Average Time spent <span id="weekAvg">0h 0m 0s</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="popup.js"></script>
+</body>
+
+</html>

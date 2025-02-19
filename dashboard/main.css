@@ -1,0 +1,212 @@
+/* Import existing dashboard styles */
+@import url('dashboard.css');
+
+/* Additional custom styles */
+:root {
+    --slate: #2D3748;
+    --grey: #4A5568;
+    --blue: #3182CE;
+    --bg-light: #F7FAFC;
+    --text-dark: #1A202C;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.logo {
+    color: var(--blue);
+}
+
+.nav-btn.active {
+    background-color: var(--blue);
+}
+
+.chart-card canvas {
+    width: 100% !important;
+    height: 300px !important;
+    margin-top: 1rem;
+}
+
+.export-options {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.primary-btn {
+    background: var(--blue);
+}
+
+.primary-btn:hover {
+    background: var(--slate);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: var(--slate);
+    color: var(--bg-light);
+}
+
+body.dark-mode .sidebar,
+body.dark-mode .stat-card,
+body.dark-mode .chart-card {
+    background-color: var(--grey);
+    border-color: var(--slate);
+}
+
+body.dark-mode .nav-btn {
+    color: var(--bg-light);
+}
+
+body.dark-mode .nav-btn:hover {
+    background-color: var(--slate);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 1rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .stats-grid,
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sites-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.sites-table th,
+.sites-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.sites-table th {
+    font-weight: 600;
+    color: #6b7280;
+    background-color: #f9fafb;
+}
+
+.sites-table td {
+    color: #374151;
+}
+
+.sites-table tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.sites-table th:first-child,
+.sites-table td:first-child {
+    width: 50px;
+    text-align: center;
+}
+
+/* Weekly Dashboard Styles */
+#weekly-chart {
+    width: 100%;
+    height: 400px;
+    margin: 1rem 0;
+}
+
+.site-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.site-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.site-rank {
+    min-width: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+}
+
+.site-stats {
+    display: flex;
+    gap: 1rem;
+}
+
+.site-time {
+    font-weight: 500;
+    color: #4CAF50;
+}
+
+.site-visits {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.heatmap {
+    width: 100%;
+    height: 200px;
+    margin: 1rem 0;
+}
+
+.heatmap-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 1rem;
+}
+
+.heatmap-day {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    background-color: #eee;
+    min-width: 20px;
+}
+
+#monthly-achievements {
+    list-style: none;
+    padding: 0;
+}
+
+#monthly-achievements li {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    background: var(--surface-color);
+    border-radius: 4px;
+}
+
+#monthly-trends-chart {
+    width: 100%;
+    height: 300px;
+}
+
+.hidden-section {
+    display: none;
+}

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebTrack - Usage Dashboard</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="../lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../assets/icons/icon128.png" alt="onWebTrack Logo" class="logo-icon" width="48" height="48">
+                <h1>onWebTrack</h1>
+            </div>
+
+            <nav>
+                <h2>ANALYTICS</h2>
+                <button class="nav-btn active" data-section="daily">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    Daily Overview
+                </button>
+                <button class="nav-btn" data-section="weekly">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    Weekly Report
+                </button>
+                <button class="nav-btn" data-section="monthly">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18" />
+                        <path d="m19 9-5 5-4-4-3 3" />
+                    </svg>
+                    Monthly Analysis
+                </button>
+            </nav>
+            <nav>
+                <h2>SYSTEM</h2>
+                <button class="nav-btn" data-section="settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0 .33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    Settings
+                </button>
+                <button class="nav-btn" data-section="about">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                    About
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Daily Section -->
+            <div class="section active" id="daily-section">
+                <header>
+                    <div>
+                        <h1>Daily Overview</h1>
+                        <p>Track your daily web usage and productivity</p>
+                    </div>
+                    <div class="date-nav">
+                        <button id="prev-day">←</button>
+                        <span id="current-date"></span>
+                        <button id="next-day">→</button>
+                    </div>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Total Time</h3>
+                        </div>
+                        <div class="stat-value">
+                            <span class="large" id="total-time">0h 0m</span>
+                            <span class="trend positive" id="total-time-trend">+0% vs yesterday</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Sites Visited</h3>
+                        </div>
+                        <div class="stat-value">
+                            <span class="large" id="sites-count">0</span>
+                            <span class="trend neutral" id="sites-trend">Same as yesterday</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Time Distribution</h3>
+                        </div>
+                        <div id="time-distribution-chart" class="chart-container">
+                            <!-- Chart will be rendered here -->
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Visited Sites</h3>
+                        </div>
+                        <div class="table-container">
+                            <div id="top-sites-list" class="visited-sites">
+                                <table class="sites-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Website</th>
+                                            <th>Time Spent</th>
+                                            <th>Sessions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sites-table-body">
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Section -->
+            <div class="section hidden" id="weekly-section">
+                <header>
+                    <div>
+                        <h1>Weekly Report</h1>
+                        <p>Analyze your weekly patterns and trends</p>
+                    </div>
+                    <div class="date-nav">
+                        <button id="prev-week">←</button>
+                        <span id="current-week"></span>
+                        <button id="next-week">→</button>
+                    </div>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Most Active Day</h3>
+                        </div>
+                        <div class="stat-value">
+                            <span class="large" id="most-active-day">Wednesday</span>
+                            <span class="description">5h 30m of focused work</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Total Weekly Time</h3>
+                        </div>
+                        <div class="stat-value">
+                            <span class="large" id="total-weekly-time">35h 45m</span>
+                            <span class="trend positive" id="weekly-time-trend">+5% vs last week</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Daily Distribution</h3>
+                            <div class="chart-actions">
+                            </div>
+                        </div>
+                        <div id="weekly-chart"></div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Most Visited Sites</h3>
+                            <div class="chart-actions">
+                            </div>
+                        </div>
+                        <div id="weekly-most-Visit" class="categories-list">
+                            <!-- Categories will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Section -->
+            <div class="section hidden" id="monthly-section">
+                <header>
+                    <div>
+                        <h1>Monthly Analysis</h1>
+                        <p>Track long-term patterns and achievements</p>
+                    </div>
+                    <div class="date-nav">
+                        <button id="prev-month">←</button>
+                        <span id="current-month"></span>
+                        <button id="next-month">→</button>
+                    </div>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Monthly Overview</h3>
+                        </div>
+                        <div class="stat-value">
+                            <span class="large" id="total-monthly-time">152h 30m</span>
+                            <span class="trend positive" id="monthly-time-trend">+8% vs last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card full-width hidden-section">
+                        <div class="chart-header">
+                            <h3>Monthly Activity Heatmap</h3>
+                            <div class="chart-actions">
+                            </div>
+                        </div>
+                        <div id="activity-heatmap" class="heatmap"></div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Monthly Trends</h3>
+                        </div>
+                        <div id="monthly-trends-chart"></div>
+                    </div>
+                    <!-- Achievement Summary section removed -->
+                </div>
+            </div>
+
+            <div class="section hidden" id="settings-section">
+                <header>
+                    <h1>Settings</h1>
+                    <p>Customize your experience</p>
+                </header>
+
+                <div class="settings-container">
+                    <div class="settings-group">
+                        <h3>General</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Dark Mode</h4>
+                                <p>Switch to dark theme</p>
+                            </div>
+                            <div class="toggle" id="dark-mode-toggle"></div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Notifications</h4>
+                                <p>Enable desktop notifications</p>
+                            </div>
+                            <div class="toggle" id="notifications-toggle"></div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>Data & Privacy</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Data Export</h4>
+                                <p>Download your usage data</p>
+                            </div>
+                            <button class="secondary-btn" id="export-data">Export</button>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Data Import</h4>
+                                <p>Add your usage data</p>
+                            </div>
+                            <button class="secondary-btn" id="import-data">Import</button>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Clear Data</h4>
+                                <p>Reset all tracking data</p>
+                            </div>
+                            <button class="danger-btn" id="clear-data">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section hidden" id="about-section">
+                <header>
+                    <h1>About WebTrack</h1>
+                    <p>Your Personal Web Activity Analytics</p>
+                </header>
+
+                <div class="about-container">
+                    <div class="about-content">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                                <h3>Smart Analytics</h3>
+                                <p>Track your web activity with detailed insights and personalized recommendations</p>
+                            </div>
+                            <div class="feature-card">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+                                <h3>Focus Mode</h3>
+                                <p>Boost productivity with customizable focus sessions and website blocking</p>
+                            </div>
+                            <div class="feature-card">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <h3>Privacy First</h3>
+                                <p>Your data stays local and secure with our offline-first approach</p>
+                            </div>
+                            <div class="feature-card">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M20.4 14.5 16 10 4 20"/></svg>
+                                <h3>Rich Visualizations</h3>
+                                <p>Beautiful charts and insights to understand your browsing patterns</p>
+                            </div>
+                            <div class="feature-card">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <h3>Custom Goals</h3>
+                                <p>Set and track personalized productivity goals</p>
+                            </div>
+                            <div class="feature-card">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                <h3>Multi-Device Support</h3>
+                                <p>Sync your data across all your devices seamlessly</p>
+                            </div>
+                        </div>
+
+                        <div class="version-info">
+                            <h3>Version 1.0.0</h3>
+                            <p>Released: February 2025</p>
+                            <div class="changelog">
+                                <h4>What's New</h4>
+                                <ul>
+                                    <li>Enhanced weekly and monthly analytics</li>
+                                    <li>Improved focus mode with customizable sessions</li>
+                                    <li>New productivity scoring system</li>
+                                    <li>Better visualization tools</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="about-footer">
+                            <h3>Connect With Us</h3>
+                            <div class="social-links">
+                                <a href="https://github.com/webtrack" target="_blank" class="social-link">
+                                    <svg xmlns="http://wwwwww.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="#" class="social-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                                    Instagram
+                                </a>
+                                <a href="#" class="social-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                                    Twitter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../lib/echarts.min.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="../charts/dailyDash.js"></script>
+    <script type="module" src="../charts/weeklyDash.js"></script>
+    <script type="module" src="../charts/monthlyDash.js"></script>
+</body>
+
+</html>
